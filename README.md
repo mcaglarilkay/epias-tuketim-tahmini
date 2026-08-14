@@ -1,6 +1,8 @@
 # EPİAŞ Elektrik Tüketimi Tahmini ve Dengesizlik Maliyeti Optimizasyonu
 
 > Türkiye Yapay Zeka Akademisi — Makine Öğrenmesi Final Ödevi
+>
+> 📓 **Notebook'u çıktılarıyla görüntülemek için:** GitHub önizlemesi açılmazsa [nbviewer üzerinden görüntüleyin](https://nbviewer.org/github/mcaglarilkay/epias-tuketim-tahmini/blob/main/epias_final.ipynb) — tüm tablolar ve grafikler eksiksiz render edilir.
 
 ## Amaç
 
