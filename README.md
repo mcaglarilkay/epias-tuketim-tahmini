@@ -6,7 +6,7 @@
 
 ## Amaç
 
-Türkiye'nin saatlik toplam elektrik tüketimini (MWh) tahmin etmek ve bu tahmini Gün Öncesi Piyasası teklifi olarak kullanıp EPİAŞ dengesizlik cezalarını en aza indirmek. Proje iki katmandan oluşur: makine öğrenmesi tahmin katmanı (5 model + naif kıyaslar + hiperparametre araması) ve tahminin parasal etkisini ölçen finansal simülasyon katmanı (dengesizlik cezası + newsvendor-optimal teklif stratejileri).
+Türkiye'nin saatlik toplam elektrik tüketimini (MWh) tahmin etmek ve bu tahmini Gün Öncesi Piyasası teklifi olarak kullanıp EPİAŞ dengesizlik cezalarını en aza indirmek. Proje iki katmandan oluşur: makine öğrenmesi tahmin katmanı (5 model + naif kıyaslar + hiperparametre araması) ve tahminin maliyet etkisini **göreli endeksle** ölçen finansal simülasyon katmanı (dengesizlik cezası mekanizması + newsvendor-optimal teklif stratejileri; tüm sonuçlar naif teklif = 100 endeksiyle raporlanır, mutlak tutar verilmez).
 
 ## Veri
 
@@ -43,17 +43,19 @@ Veri dosyaları repo içindedir (`data/train/`, `data/test/`, `data/weather.csv`
 | Senaryo A — saat öncesi | 427 | 603 | %1,06 | 0,992 | 0,183 |
 | Senaryo B — gün öncesi | 940 | 1.440 | %2,37 | 0,955 | 0,403 |
 
-**Finansal simülasyon (test dönemi toplam dengesizlik cezası):**
+**Finansal simülasyon (test dönemi toplam dengesizlik maliyeti — göreli endeks, naif = 100):**
 
-| Strateji | Ceza (Milyon TL) | Naife göre tasarruf |
+| Strateji | Maliyet Endeksi (Naif = 100) | Naife göre tasarruf |
 |---|---|---|
-| Naif teklif (dün aynı saat) | 7.132 | — |
-| A — ortalama / alpha / kantil(τ*) | 1.382 / 1.352 / 1.448 | %80,6 / **%81,0** / %79,7 |
-| B — ortalama / alpha / kantil(τ*) | 3.155 / 2.748 / 3.245 | %55,8 / **%61,5** / %54,5 |
+| Naif teklif (dün aynı saat) | 100,0 | — |
+| A — ortalama / alpha / kantil(τ*) | 19,4 / 19,0 / 20,3 | %80,6 / **%81,0** / %79,7 |
+| B — ortalama / alpha / kantil(τ*) | 44,2 / 38,5 / 45,5 | %55,8 / **%61,5** / %54,5 |
 
-Gerçekçi iş rakamı **B satırlarıdır** (gün-öncesi kurallarına uygun): en iyi strateji **B-alpha** ile ceza ≈2,75 milyar TL'ye iner (%61,5 tasarruf). A satırları modelin tavanını gösterir. τ* = 0,503 (validation'da tavan-fiyat saatlerinde Cu=Co simetrisi) olduğundan kantil strateji bu dönemde ek avantaj sağlamadı; tüm strateji parametreleri yalnızca validation'dan gelir, test hiçbir ayarda kullanılmamıştır.
+Gerçekçi iş rakamı **B satırlarıdır** (gün-öncesi kurallarına uygun): en iyi strateji **B-alpha** ile maliyet endeksi 38,5'e iner (%61,5 tasarruf). A satırları modelin tavanını gösterir. τ* = 0,503 (validation'da tavan-fiyat saatlerinde Cu=Co simetrisi) olduğundan kantil strateji bu dönemde ek avantaj sağlamadı; tüm strateji parametreleri yalnızca validation'dan gelir, test hiçbir ayarda kullanılmamıştır.
 
 ## Kısıtlar
+
+- **Raporlama ilkesi:** Maliyet sonuçları mutlak tutar olarak değil, naif teklif = 100 endeksiyle raporlanır; endeksler herhangi bir piyasa büyüklüğünü veya katılımcı maliyetini ölçmez. Çalışma eğitim amaçlıdır; teklif, işlem veya strateji tavsiyesi değildir.
 
 - **Tahmin ufku:** Senaryo A "bir saat öncesi" tahmincisidir ve üst sınırdır; gerçek GÖP ufku 13–35 saattir (Senaryo B bunu modeller, tekdüze ≥24 saat sadeleştirmesiyle).
 - **Sıcaklık vekili:** Gerçekleşen sıcaklık, teklif anındaki hava tahmininin vekili (proxy) olarak kullanılır; canlı sistemde meteorolojik tahmin verisi gerekir.
