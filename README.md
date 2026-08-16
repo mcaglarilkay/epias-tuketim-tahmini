@@ -2,7 +2,7 @@
 
 > Türkiye Yapay Zeka Akademisi — Makine Öğrenmesi Final Ödevi
 >
-> 📓 **Notebook'u çıktılarıyla görüntülemek için:** GitHub önizlemesi açılmazsa [nbviewer üzerinden görüntüleyin](https://nbviewer.org/github/mcaglarilkay/epias-tuketim-tahmini/blob/main/epias_final.ipynb) — tüm tablolar ve grafikler eksiksiz render edilir.
+> 📓 **Notebook'u çıktılarıyla görüntüleme seçenekleri:** [GitHub önizlemesi](https://github.com/mcaglarilkay/epias-tuketim-tahmini/blob/main/epias_final.ipynb) · [Google Colab](https://colab.research.google.com/github/mcaglarilkay/epias-tuketim-tahmini/blob/main/epias_final.ipynb) · [nbviewer](https://nbviewer.org/github/mcaglarilkay/epias-tuketim-tahmini/blob/main/epias_final.ipynb) — ayrıca repodaki `epias_final.html` dosyası, notebook'un tarayıcıda açılabilir statik kopyasıdır.
 
 ## Amaç
 
